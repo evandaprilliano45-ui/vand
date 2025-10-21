@@ -1591,15 +1591,18 @@ body.light-mode .footer-col ul li a:hover {
   }
 }
 
-/* ===== Perbaikan card agar deskripsi tidak terpotong ===== */
 @media (max-width: 768px) {
+
+  /* Grid card di semua section */
   .card-grid {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+    padding: 0 10px; /* beri sedikit padding kiri kanan */
   }
 
+  /* Card */
   .card {
     width: 100%;
     max-width: 340px;
@@ -1610,12 +1613,12 @@ body.light-mode .footer-col ul li a:hover {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: auto;
+    height: auto; /* biarkan tinggi mengikuti isi */
   }
 
   .card img {
     width: 100%;
-    height: auto;
+    height: auto; /* tinggi otomatis supaya tidak terpotong */
     border-radius: 12px;
     margin-bottom: 10px;
     object-fit: cover;
@@ -1623,17 +1626,20 @@ body.light-mode .footer-col ul li a:hover {
 
   .card h4 {
     font-size: 1.1rem;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     text-align: center;
     color: var(--text-color, #fff);
   }
 
   .card p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     text-align: center;
     color: var(--text-muted, #ccc);
     margin-bottom: 0;
+    line-height: 1.4; /* biar teks tidak mepet */
+    word-wrap: break-word; /* supaya teks panjang tetap turun */
   }
 }
+
 
 
