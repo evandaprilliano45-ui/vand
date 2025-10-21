@@ -1752,3 +1752,51 @@ body.light-mode .footer-col ul li a:hover {
     }
   }
 }
+
+/* 🔧 FINAL FIX: Hero Image agar tidak terpotong di semua ukuran layar */
+.hero-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero-gallery img {
+  width: 100%;
+  height: auto;              /* biar proporsional */
+  max-height: 250px;         /* batas tinggi agar tidak terlalu besar */
+  object-fit: contain !important; /* tampilkan seluruh gambar */
+  border-radius: 15px;
+  background-color: #0a0a15; /* biar area kosong tetap rapi */
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.hero-gallery img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* 🔧 Untuk layar kecil (HP) */
+@media (max-width: 768px) {
+  .hero-gallery {
+    grid-template-columns: 1fr 1fr; /* dua kolom */
+    gap: 0.8rem;
+  }
+
+  .hero-gallery img {
+    max-height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-gallery {
+    grid-template-columns: 1fr; /* satu kolom di HP kecil */
+  }
+
+  .hero-gallery img {
+    max-height: 160px;
+  }
+}
+
