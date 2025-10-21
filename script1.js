@@ -173,7 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!mapContainer) return;
 
   // Map gelap modern
-  const map = L.map('map-container', { zoomControl: false }).setView([-7.250445, 112.768845], 13);
+  const map = L.map('map-container', { zoomControl: false })
+    .setView([-6.465839, 110.725829], 15);
+
 
   // Tile gelap elegan dari CartoDB Dark
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -195,9 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
     iconSize: [20, 20]
   });
 
-  L.marker([-7.250445, 112.768845], { icon }).addTo(map)
-    .bindPopup('<strong>Lokasi Saya</strong><br>Surabaya, Indonesia')
+  L.marker([-6.465839, 110.725829], { icon }).addTo(map)
+    .bindPopup('<strong>Lokasi Saya</strong><br>Bondo, Jepara, Indonesia')
     .openPopup();
+
 
   // ===== Fitur "yang tidak terpikirkan manusia" =====
   // 1️⃣ Mouse hover highlight radius interaktif
