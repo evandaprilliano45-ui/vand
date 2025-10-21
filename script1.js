@@ -126,18 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 // Simple email subscription simulation
-document.getElementById("subscribeForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const email = document.getElementById("emailInput").value.trim();
-
-  if (!email || !email.includes("@")) {
-    alert("Please enter a valid email address!");
-    return;
-  }
-
-  alert(`Thank you for subscribing, ${email}!`);
-  document.getElementById("subscribeForm").reset();
-});
 
 const form = document.getElementById("subscribe-form");
 const emailInput = document.getElementById("email");
@@ -247,3 +235,15 @@ document.addEventListener('DOMContentLoaded', () => {
     mapParticles.setStyle({ radius: 5 + 3 * Math.abs(Math.sin(pulse)) });
   }, 50);
 });
+
+let ticking = false;
+window.addEventListener("scroll", function () {
+  if (!ticking) {
+    window.requestAnimationFrame(function () {
+      revealElements();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
