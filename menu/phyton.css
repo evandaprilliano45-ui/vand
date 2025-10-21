@@ -1,0 +1,156 @@
+/* === RESET DASAR === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top left, #0a0a0a 0%, #121212 100%);
+  color: #00baff;
+  padding: 50px 10%;
+  overflow-x: hidden;
+}
+
+/* === TOMBOL BACK === */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: transparent;
+  border: 2px solid #00baff;
+  color: #00baff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.back-btn:hover {
+  background-color: #00baff;
+  color: #111;
+  transform: scale(1.05);
+}
+
+/* === JUDUL === */
+.blog-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #00baff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+/* Garis dekoratif di bawah judul */
+.blog-section h2::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 3px;
+  background: #00baff;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* === GRID === */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* === CARD === */
+.blog-card {
+  background: #1b1b1b;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 186, 255, 0.1);
+  transform: translateY(40px);
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+.blog-card.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.blog-card:hover {
+  transform: scale(1.03);
+}
+
+/* === GAMBAR === */
+.image-wrapper {
+  width: 100%;
+  height: 200px;
+  background-color: #000; /* latar belakang biar rapi kalau gambar tak pas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* gambar selalu di tengah */
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .image-wrapper img {
+  transform: scale(1.05); /* efek hover ringan */
+}
+
+
+.blog-card:hover .image-wrapper img {
+  transform: scale(1.08);
+}
+
+/* === KONTEN === */
+.content {
+  padding: 20px;
+  text-align: center;
+}
+
+.content h3 {
+  color: #00baff;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.content p {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* === ANIMASI BACKGROUND === */
+@keyframes subtleShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f0f, #151515, #0a0a0a);
+  background-size: 400% 400%;
+  animation: subtleShift 20s ease infinite;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .back-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+  
+  .content h3 {
+    font-size: 1rem;
+  }
+}

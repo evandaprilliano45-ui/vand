@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hidden Wonders | Neon Travel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles1.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- ========== Kebutuhan Peta ========== -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+
+  <!-- ========== TOGGLE MODE BUTTON ========== -->
+  <button id="mode-toggle" class="mode-toggle">☀️</button>
+
+  <!-- ========== NAVBAR ========== -->
+  <header class="navbar">
+    <div class="logo">Evand<span>Aprilliano</span></div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#Keahlian">Keahlian</a>
+      <a href="#Prestasi">Prestasi</a>
+      <a href="#Hobbi">Hobbi</a>
+      <a href="#bakat">Minat Bakat</a>
+      <a href="#Pendidikan">Pendidikan</a>
+      <a href="#subscribe">Kontak</a>
+    </nav>
+  </header>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="home">
+    <div class="hero-content reveal">
+      <h2>Welcome us discover <span>more about me here</span></h2>
+      <p>Dari pada kepo sama aku, yok kenal aku lebih jauh di website portofolioku ini</p>
+      <a href="https://wa.me/message/F3XVMIKPKXKBN1?src=qr" class="btn">Kenalan Sekarang</a>
+    </div>
+
+    <div class="hero-gallery reveal">
+      <img src="Evand 1.jpg" alt="Beach" />
+      <img src="Evand 2.jpg" alt="Mountains" />
+      <img src="Evand 3.jpg" alt="Temple" />
+      <img src="Evand 4.jpg" alt="Village" />
+    </div>
+  </section>
+
+  <!-- ========== TOP DESTINATIONS ========== -->
+  <section class="destinations reveal" id="Keahlian">
+    <h3 class="section-title">Kemampuan</h3>
+    <div class="card-grid">
+
+    <a href="menu/hatml.html" class="card-link">
+      <div class="card">
+        <img src="html.png" alt="">
+        <h4>HTML</h4>
+        <p>aya berhasil menguasai bahasa ini di tingkat menengah</p>
+      </div>
+      </a>
+
+      <a href="cess.html" class="card-link">
+      <div class="card">
+        <img src="css.png" alt="">
+        <h4>CSS</h4>
+        <p>Saya berhasil menguasai bahasa ini di tingkat menengah</p>
+      </div>
+      </a>
+
+      <a href="menu/java.html" class="card-link">
+      <div class="card">
+        <img src="java.png" alt="">
+        <h4>JavaScript</h4>
+        <p>Saya berhasil menguasai Bahasa ini di tingkat menengah</p>
+      </div>
+      </a>
+
+      <a href="menu/php.html" class="card-link">
+      <div class="card">
+        <img src="php.png" alt="">
+        <h4>PHP</h4>
+        <p>Saya berhasil menguasai bahasa ini di tingkat dasar</p>
+      </div>
+      </a>
+
+      <a href="menu/mysql.html" class="card-link">
+      <div class="card">
+        <img src="mysql.png" alt="">
+        <h4>MySQL</h4>
+        <p>Saya berhasil menguasai bahasa ini di tingkat dasar</p>
+      </div>
+      </a>
+
+      <a href="menu/wordpress.html" class="card-link">
+      <div class="card">
+        <img src="wordpress.png" alt="">
+        <h4>WordPress</h4>
+        <p>Saya berhasil menguasai bahasa ini di tingkat dasar</p>
+      </div>
+      </a>
+
+      <a href="menu/phyton.html" class="card-link">
+      <div class="card">
+        <img src="python.png" alt="">
+        <h4>Python</h4>
+        <p>Saya berhasil menguasai bahasa ini di tingkat dasar</p>
+      </div>
+      </a>
+
+      <a href="menu/figma.html" class="card-link">
+      <div class="card">
+        <img src="figma.png" alt="">
+        <h4>Figma</h4>
+        <p>Di sini saya ahli membuat landing page, poster, prototype, dll</p>
+      </div>
+      </a>
+
+      <a href="menu/canva.html" class="card-link">
+      <div class="card">
+        <img src="canva.png" alt="">
+        <h4>Canva</h4>
+        <p>Saya mahir di dalam membuat desain menggunakan canva</p>
+      </div>
+      </a>
+
+      <a href="menu/adobe.html" class="card-link">
+      <div class="card">
+        <img src="adobe.png" alt="">
+        <h4>Adobbe Ilustrator</h4>
+        <p>Saya mahir di dalam membuat desain menggunakan Adobbe Ilustrator</p>
+      </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ========== Prestasi ========== -->
+  <section class="stories reveal" id="Prestasi">
+    <h3 class="section-title">Prestasi</h3>
+    <div class="card-grid">
+      <div class="card">
+        <img src="popda 3.jpg" alt="">
+        <h4>Juara 3</h4>
+        <p>Popda Pencak silat Th.2024</p>
+      </div>
+
+      <div class="card">
+        <img src="juara.jpg" alt="">
+        <h4>Juara 1</h4>
+        <p>Lomba video antar pangkalan saka Widya Budaya Bhakti Th.2025</p>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e" alt="">
+        <h4>Sertifikat Bahasa inggris</h4>
+        <p>2 Sertifikat les bahasa Inggris grade B+.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e" alt="">
+        <h4>Sertifikat Bahasa inggris</h4>
+        <p>2 Sertifikat les bahasa Inggris grade B+.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e" alt="">
+        <h4>Sertifikat Bahasa inggris</h4>
+        <p>2 Sertifikat les bahasa Inggris grade B+.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== Hobbi ========== -->
+  <section class="highlights reveal" id="Hobbi">
+    <h3 class="section-title">Hobbi</h3>
+    <div class="card-grid">
+
+      <div class="card">
+        <img src="lari.png" alt="">
+        <h4>Berlari</h4>
+        <p>Tetap suka lari walau pace masih gak ada peningkatan, Info lari yuk</p>
+      </div>
+      
+      <div class="card">
+        <img src="gunung.png" alt="">
+        <h4>Mendaki Gunung</h4>
+        <p>saya menyukai hobbi ini sejak smp, belum tamat s3 ini</p>
+      </div>
+      
+      <div class="card">
+        <img src="riding.png" alt="">
+        <h4>Riding ke luar kota</h4>
+        <p>hobbi ini saya lakukan sejak sekolah menengah kejuruan</p>
+      </div>
+
+      <div class="card">
+        <img src="renang.png" alt="">
+        <h4>Berenang</h4>
+        <p>berenang menjadi hobbi saya sejak sekolah dasar</p>
+      </div>
+      </div>
+  </section>
+
+  <!-- ========== Minat Bakat ========== -->
+  <section class="highlights reveal" id="bakat">
+    <h3 class="section-title">Minat Bakat</h3>
+    <div class="card-grid">
+
+      <a href="passus.html" class="card-link">
+        <div class="card">
+          <img src="passus.png" alt="">
+          <h4>Passus</h4>
+          <p>Wira Adhi Dhaya</p>
+        </div>
+      </a>
+
+      <a href="pramuka.html" class="card-link">
+      <div class="card">
+        <img src="pramuka.png" alt="">
+        <h4>Pramuka</h4>
+        <p>KH. Achmad Fauzan [03.161]</p>
+      </div>
+      </a>
+      
+      <a href="paskibra.html" class="card-link">
+      <div class="card">
+        <img src="paskibra.png" alt="">
+        <h4>Paskibraka</h4>
+        <p>Kecamatan Bangsri tahun 2025</p>
+      </div>
+      </a>
+
+      <a href="pencaksilat.html" class="card-link">
+      <div class="card">
+        <img src="psht.png" alt="">
+        <h4>Pencak Silat</h4>
+        <p>Pesudaraan Setia Hati Terate</p>
+      </div>
+      </a>
+
+      </div>
+  </section>
+
+<!-- ========== Pendidikan ========== -->
+  <section class="destinations reveal" id="Pendidikan">
+    <h3 class="section-title">Pendidikan</h3>
+    <div class="card-grid">
+
+      <div class="card">
+        <img src="paud.png" alt="">
+        <h4>KB. Paud Lintang</h4>
+        <p>Awal mula mengenal teman kids.</p>
+      </div>
+
+      <div class="card">
+        <img src="tk.png" alt="">
+        <h4>TK Ester Bondo 01</h4>
+        <p>Mulai punya teman akrab.</p>
+      </div>
+
+      <div class="card">
+        <img src="sd.png" alt="">
+        <h4>SD Negeri 04 Bondo</h4>
+        <p>Waktu dimana rangking 01 itu sangat easy.</p>
+      </div>
+
+      <div class="card">
+        <img src="smp.png" alt="">
+        <h4>SMP Negeri 3 Kembang</h4>
+        <p>Awal mula kenal organisasi dan kenal yang namanya cinta.</p>
+      </div>
+
+      <div class="card">
+        <img src="smk.png" alt="">
+        <h4>SMK Negeri 01 Bangsri</h4>
+        <p>Waktunya dimana kita di paksa lebih serius lagi.</p>
+      </div>
+    </div>
+  </section>
+
+<!-- ========== MAP SECTION ========== -->
+<section class="map-section reveal" id="map">
+  <h3 class="section-title">Lokasi Saya</h3>
+
+  <!-- Google Maps Embed (gratis, tanpa API key) -->
+  <div id="map-container">
+    <iframe
+      src="https://www.google.com/maps?q=-6.465839,110.725829&hl=id&z=15&output=embed"
+      width="100%"
+      height="400"
+      style="border:0; border-radius:12px;"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <!-- Teks alamat otomatis -->
+  <div id="alamat-container">
+    <p id="alamat-text">Mengambil alamat...</p>
+  </div>
+</section>
+
+<script>
+// Koordinat Evand
+const latitude = -6.465839;
+const longitude = 110.725829;
+
+// API gratis dari Nominatim (OpenStreetMap)
+const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`;
+
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    const alamat = data.display_name;
+    document.getElementById("alamat-text").textContent = alamat
+      ? `Alamat Saya : ${alamat}`
+      : "Alamat tidak ditemukan.";
+  })
+  .catch(() => {
+    document.getElementById("alamat-text").textContent = "Gagal memuat alamat.";
+  });
+</script>
+
+  
+<!-- ========== SUBSCRIBE SECTION ========== -->
+<section class="subscribe reveal" id="subscribe">
+  <div class="subscribe-container">
+    <div class="subscribe-text">
+      <h3 class="section-title">
+        <i class="fa-solid fa-envelope"></i>  
+        Masukan email anda dan berteman dengan saya
+      </h3>
+      <p class="note">Dapatkan update terbaru dari proyek dan karya saya langsung di inbox kamu.</p>
+    </div>
+
+    <form id="subscribe-form" class="subscribe-form">
+      <div class="input-wrapper">
+        <input
+          type="email"
+          id="email"
+          placeholder="Masukkan email kamu..."
+          required
+        />
+        <button type="submit" class="btn">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Kenalan</span>
+        </button>
+      </div>
+      <small class="error-message" id="error-message"></small>
+    </form>
+  </div>
+
+  <!-- Popup sukses -->
+  <div class="success-popup" id="success-popup">
+    <i class="fa-solid fa-circle-check"></i>
+    <h4>Berhasil Terhubung</h4>
+    <p>Terima kasih sudah mampir ke website saya!</p>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+</section>
+
+
+<!-- ========== FOOTER SECTION ========== -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-col about">
+      <h3 class="footer-logo">Evand Aprilliano</h3>
+      <p>
+        Mari kita saling kenalan dan dapatkan notifikasi jika saya
+         memposting unggahan baru dari karya dan keseruan saya.
+      </p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/share/19zMKQvhD1/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/vandrilliann?igsh=MTR2ZTFpN3F2a3kxcA=="><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/EvandAprilliano?t=NuKfwmhdUkTEiSd5GHMZkQ&s=09"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://youtube.com/@evandapril?si=ukXE0ulyvm7jMyDY"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Keahlian</a></li>
+        <li><a href="#">Prestasi</a></li>
+        <li><a href="#">Hobbi</a></li>
+        <li><a href="#">Minat Bakat</a></li>
+        <li><a href="#">Pendidikan</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Social Media</h4>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">YouTube</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <ul>
+        <li><i class="fas fa-phone"></i> +62 878 7425 4445</li>
+        <li><i class="fas fa-envelope"></i>evandaprilliano@gmail.com</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 <span>Evand</span>. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms of Use</a></li>
+      <li><a href="#">Legal</a></li>
+      <li><a href="#">Site Map</a></li>
+    </ul>
+  </div>
+</footer>
+
+ <script src="script1.js"></script>
+
+<!-- ========== SCRIPT TOGGLE LIGHT MODE ========== -->
+<script>
+const toggleBtn = document.getElementById("mode-toggle");
+const body = document.body;
+
+// Cek mode dari localStorage
+if (localStorage.getItem("theme") === "light") {
+  body.classList.add("light-mode");
+  toggleBtn.textContent = "🌙";
+}
+
+// Klik tombol untuk ubah mode
+toggleBtn.addEventListener("click", () => {
+  body.classList.toggle("light-mode");
+
+  if (body.classList.contains("light-mode")) {
+    toggleBtn.textContent = "🌙";
+    localStorage.setItem("theme", "light");
+  } else {
+    toggleBtn.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
+  }
+});
+</script>
+</body>
+</html>
