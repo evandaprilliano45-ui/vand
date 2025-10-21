@@ -125,46 +125,56 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })();
 
-// Simple email subscription simulation
+// ========== Email Subscribe (Versi Fix Total) ==========
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("subscribe-form");
+  const emailInput = document.getElementById("email");
+  const popup = document.getElementById("success-popup");
+  const toast = document.getElementById("toast");
+  const errorMessage = document.getElementById("error-message");
 
-const form = document.getElementById("subscribe-form");
-const emailInput = document.getElementById("email");
-const popup = document.getElementById("success-popup");
-const toast = document.getElementById("toast");
-const errorMessage = document.getElementById("error-message");
-
-function showToast(message, type = "success") {
-  toast.textContent = message;
-  toast.style.borderColor = type === "error" ? "#ef4444" : "rgba(255,255,255,0.1)";
-  toast.style.background = type === "error" ? "rgba(60, 20, 20, 0.9)" : "rgba(40, 44, 52, 0.9)";
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 3000);
-}
-
-function validateEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = emailInput.value.trim();
-
-  if (!validateEmail(email)) {
-    errorMessage.textContent = "Masukkan email yang valid!";
-    showToast("Email tidak valid 😕", "error");
+  if (!form) {
+    console.warn("Form subscribe tidak ditemukan di halaman.");
     return;
   }
 
-  errorMessage.textContent = "";
-  showToast("Menghubungkan...", "loading");
+  function showToast(message, type = "success") {
+    if (!toast) return;
+    toast.textContent = message;
+    toast.style.borderColor = type === "error" ? "#ef4444" : "rgba(255,255,255,0.1)";
+    toast.style.background =
+      type === "error" ? "rgba(60, 20, 20, 0.9)" : "rgba(40, 44, 52, 0.9)";
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3000);
+  }
 
-  setTimeout(() => {
-    form.reset();
-    popup.classList.add("show");
-    showToast("Berhasil terhubung! 🎉");
-    setTimeout(() => popup.classList.remove("show"), 2000);
-  }, 1500);
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+
+    if (!validateEmail(email)) {
+      errorMessage.textContent = "Masukkan email yang valid!";
+      showToast("Email tidak valid 😕", "error");
+      return;
+    }
+
+    errorMessage.textContent = "";
+    showToast("Menghubungkan...");
+
+    // Simulasi kirim data ke server
+    setTimeout(() => {
+      form.reset();
+      if (popup) popup.classList.add("show");
+      showToast("Berhasil terhubung! 🎉");
+      setTimeout(() => popup?.classList.remove("show"), 2000);
+    }, 1200);
+  });
 });
+
 
 /* ========== MAP ========== */
 
@@ -202,9 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .openPopup();
 
 
-  // ===== Fitur "yang tidak terpikirkan manusia" =====
-  // 1️⃣ Mouse hover highlight radius interaktif
-  const radius = L.circle([-7.250445, 112.768845], {
+    // ===== Efek Interaktif Peta =====
+  // 1️⃣ Radius interaktif di sekitar marker utama
+  const radius = L.circle([-6.465839, 110.725829], {
     radius: 300,
     color: '#00baff33',
     fillColor: '#00baff22',
@@ -214,10 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2️⃣ Tooltip follow cursor
   map.on('mousemove', e => {
-    radius.setLatLng(e.latlng); // radius bergerak mengikuti kursor
+    radius.setLatLng(e.latlng);
   });
 
-  // 3️⃣ Zoom smooth & animated on scroll
+  // 3️⃣ Zoom smooth saat scroll
   window.addEventListener('scroll', () => {
     const mapRect = mapContainer.getBoundingClientRect();
     if (mapRect.top < window.innerHeight && mapRect.bottom > 0) {
@@ -226,12 +236,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 4️⃣ Ambient particle effect (cahaya subtle)
-  const mapParticles = L.circleMarker([-7.250445, 112.768845], {
+  // 4️⃣ Efek partikel cahaya halus di marker utama
+  const mapParticles = L.circleMarker([-6.465839, 110.725829], {
     radius: 5,
     color: 'var(--accent)',
     fillOpacity: 0.3
   }).addTo(map);
+
   let pulse = 0;
   setInterval(() => {
     pulse = (pulse + 0.05) % 2;
