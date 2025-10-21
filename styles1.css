@@ -1723,3 +1723,32 @@ body.light-mode .footer-col ul li a:hover {
   object-fit: cover;
 }
 
+/* Atur ulang tinggi card di mobile agar teks tidak terpotong */
+@media (max-width: 768px) {
+  .card {
+    height: auto !important;
+    min-height: 220px;
+    padding-bottom: 1rem;
+  }
+
+  .card p {
+    display: block;
+    overflow: visible;
+    text-overflow: unset;
+    white-space: normal;
+    line-height: 1.4;
+    font-size: 0.9rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  /* Jika layar sangat kecil */
+  @media (max-width: 480px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
