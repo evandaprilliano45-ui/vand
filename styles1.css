@@ -1697,6 +1697,7 @@ body.light-mode .footer-col ul li a:hover {
     margin-bottom: 10px;
   }
 
+
   .card-grid .card h4,
   .card-grid .card p {
     font-size: 1.1rem;
@@ -1705,5 +1706,20 @@ body.light-mode .footer-col ul li a:hover {
     color: var(--text-color, #fff);
     word-wrap: break-word;
   }
+}
+
+/* 🔧 FIX TERAKHIR UNTUK CARD TERPOTONG */
+.card {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.card-grid {
+  align-items: flex-start !important;
+}
+
+.card img {
+  height: auto !important;
+  object-fit: cover;
 }
 
