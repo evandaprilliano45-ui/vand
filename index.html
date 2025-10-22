@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- ========== Kebutuhan Peta ========== -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" href="favicon.png">
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
@@ -335,14 +334,17 @@ fetch(url)
       <p class="note">Dapatkan update terbaru dari proyek dan karya saya langsung di inbox kamu.</p>
     </div>
 
-    <form id="subscribe-form" class="subscribe-form">
+    <form id="subscribe-form" class="subscribe-form" autocomplete="on">
       <div class="input-wrapper">
+
         <input
           type="email"
           id="email"
           placeholder="Masukkan email kamu..."
+          autocomplete="email"
           required
         />
+
         <button type="submit" class="btn">
           <i class="fa-solid fa-paper-plane"></i>
           <span>Kenalan</span>
@@ -361,7 +363,53 @@ fetch(url)
 
   <!-- Toast Notification -->
   <div class="toast" id="toast"></div>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("subscribe-form");
+  const emailInput = document.getElementById("email");
+  const errorMessage = document.getElementById("error-message");
+  const successPopup = document.getElementById("success-popup");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+
+    // Validasi email menggunakan regex
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorMessage.textContent = "Masukkan alamat email yang valid.";
+      return;
+    }
+
+    errorMessage.textContent = "";
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Tampilkan popup sukses
+        successPopup.style.display = "flex";
+        setTimeout(() => (successPopup.style.display = "none"), 3000);
+        form.reset();
+      } else {
+        errorMessage.textContent = data.message || "Terjadi kesalahan";
+      }
+    } catch (err) {
+      errorMessage.textContent = "Tidak dapat terhubung ke server";
+    }
+  });
+});
+</script>
+
+
 </section>
+
 
 
 <!-- ========== FOOTER SECTION ========== -->
@@ -448,48 +496,6 @@ toggleBtn.addEventListener("click", () => {
   }
 });
 </script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("subscribe-form");
-  const emailInput = document.getElementById("email");
-  const errorMessage = document.getElementById("error-message");
-  const successPopup = document.getElementById("success-popup");
-  const toast = document.getElementById("toast");
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const email = emailInput.value.trim();
-
-    // Validasi email sederhana
-    if (!email || !email.includes("@") || !email.includes(".")) {
-      errorMessage.textContent = "Masukkan alamat email yang valid.";
-      errorMessage.style.color = "#ef4444";
-      return;
-    }
-
-    // Jika valid
-    errorMessage.textContent = "";
-    successPopup.style.display = "flex";
-    successPopup.classList.add("show");
-
-    // Hilangkan popup setelah 3 detik
-    setTimeout(() => {
-      successPopup.classList.remove("show");
-      successPopup.style.display = "none";
-    }, 3000);
-
-    // Notifikasi kecil di bawah
-    toast.textContent = "Berhasil berlangganan 🎉";
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 3000);
-
-    form.reset();
-  });
-});
-</script>
-
 
 <script src="script1.js"></script>
 
