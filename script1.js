@@ -125,20 +125,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })();
 
-// ========== Email Subscribe (Versi Fix Total) ==========
+// ========== Kritik & Saran (Gabung EmailJS + Validasi + Popup) ==========
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("subscribe-form");
+  const form = document.getElementById("kritik-form");
+  const namaInput = document.getElementById("nama");
   const emailInput = document.getElementById("email");
-  const errorMessage = document.getElementById("error-message");
-  const popup = document.getElementById("success-popup");
+  const pesanInput = document.getElementById("pesan");
   const toast = document.getElementById("toast");
+  const popup = document.getElementById("success-popup");
 
-  function showToast(message, type = "success") {
+  // Inisialisasi EmailJS
+  emailjs.init("nFt3MqZwAFNWB935J"); // Ganti dengan Public Key kamu
+
+  function showToast(message) {
     if (!toast) return;
     toast.textContent = message;
-    toast.style.borderColor = type === "error" ? "#ef4444" : "rgba(255,255,255,0.1)";
-    toast.style.background =
-      type === "error" ? "rgba(60,20,20,0.9)" : "rgba(40,44,52,0.9)";
     toast.classList.add("show");
     setTimeout(() => toast.classList.remove("show"), 3000);
   }
@@ -147,24 +148,37 @@ document.addEventListener("DOMContentLoaded", () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
+  if (!form) return;
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const email = emailInput.value.trim();
 
-    if (!validateEmail(email)) {
-      errorMessage.textContent = "Masukkan email yang valid!";
-      showToast("Email tidak valid 😕", "error");
+    const nama = namaInput.value.trim();
+    const email = emailInput.value.trim();
+    const pesan = pesanInput.value.trim();
+
+    if (!nama || !email || !pesan) {
+      showToast("⚠️ Isi semua kolom dulu!");
       return;
     }
 
-    errorMessage.textContent = "";
-    showToast("Berhasil terhubung! 🎉");
+    if (!validateEmail(email)) {
+      showToast("😕 Email tidak valid!");
+      return;
+    }
 
-    // Tampilkan popup sukses
-    if (popup) popup.classList.add("show");
-    setTimeout(() => popup?.classList.remove("show"), 3000);
-
-    form.reset();
+    // Kirim ke EmailJS
+    emailjs.sendForm("service_ubqq3un", "template_tzfz41c", form)
+      .then(() => {
+        popup.classList.add("show");
+        showToast("🎉 Pesan berhasil dikirim!");
+        form.reset();
+        setTimeout(() => popup.classList.remove("show"), 3000);
+      })
+      .catch((error) => {
+        console.error("EmailJS Error:", error);
+        showToast("❌ Gagal mengirim pesan. Coba lagi nanti.");
+      });
   });
 });
 
