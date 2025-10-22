@@ -1800,3 +1800,97 @@ body.light-mode .footer-col ul li a:hover {
   }
 }
 
+/* ===============================
+   🎯 FIX HERO & CARD GRID (Final)
+   =============================== */
+
+/* ===== HERO ===== */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem 10%;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.hero-content {
+  flex: 1 1 380px;
+}
+
+.hero-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  flex: 1 1 380px;
+}
+
+.hero-gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.hero-gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== CARD GRID ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 10%;
+  justify-items: center;
+}
+
+.card {
+  background: var(--card-bg, rgba(255,255,255,0.05));
+  border-radius: 16px;
+  overflow: hidden;
+  padding-bottom: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 4rem 1.5rem;
+  }
+
+  .hero-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+
+  .card img {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-gallery {
+    grid-template-columns: 1fr;
+  }
+}
