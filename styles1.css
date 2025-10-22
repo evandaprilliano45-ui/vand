@@ -23,78 +23,164 @@ body {
   --blur: blur(12px);
 }
 
-/* ============ NAVBAR ============ */
-.navbar {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background: rgba(5, 10, 20, 0.6);
-  backdrop-filter: blur(15px);
+/* ============ NAVBAR MODERN RESPONSIVE anjing marai ngelu tai============ */
+.navbar-modern {
+  background: rgba(5,10,20,0.35);
+  backdrop-filter: blur(20px) saturate(180%);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 6%;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
   z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   transition: all 0.4s ease;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.navbar.scrolled {
-  background: rgba(0, 10, 20, 0.9);
-  box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+.navbar-modern.scrolled {
+  background: rgba(5,10,20,0.85);
+  box-shadow: 0 5px 25px rgba(0,0,0,0.4);
 }
 
-.logo {
+.navbar-modern .logo {
   color: var(--accent);
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   letter-spacing: 1.5px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.logo:hover {
-  transform: scale(1.05);
-  filter: brightness(1.3);
+.navbar-modern .logo:hover {
+  transform: scale(1.08);
+  filter: brightness(1.4);
 }
 
-nav a {
+.navbar-modern nav {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-modern nav a {
   color: #ccc;
   margin-left: 2rem;
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.3s;
+  transition: all 0.4s ease;
   position: relative;
+  padding: 0.2rem 0;
 }
 
-nav a::after {
+.navbar-modern nav a::after {
   content: '';
   position: absolute;
   bottom: -5px;
   left: 0;
   width: 100%;
   height: 2px;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent), #00ffee);
   transform: scaleX(0);
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 }
 
-nav a:hover {
-  color: var(--accent);
-}
-
-nav a:hover::after {
+.navbar-modern nav a:hover::after,
+.navbar-modern nav a.active::after {
   transform: scaleX(1);
+}
+
+.navbar-modern nav a:hover {
+  color: #00ffee;
+}
+
+/* ===== HAMBURGER MENU ===== */
+.navbar-modern .nav-toggle {
+  display: none;
+}
+
+.navbar-modern .nav-toggle-label {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.navbar-modern .nav-toggle-label span {
+  width: 28px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar-modern {
+    padding: 0.8rem 4%;
+  }
+
+  .navbar-modern nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    max-height: 0;
+    overflow: hidden;
+    background: rgba(5,10,20,0.95);
+    transition: max-height 0.35s ease;
+    z-index: 999;
+  }
+
+  .navbar-modern nav a {
+    margin: 1rem 0;
+    font-size: 1rem;
+  }
+
+  .navbar-modern .nav-toggle-label {
+    display: flex;
+  }
+
+  /* Toggle menu */
+  .navbar-modern .nav-toggle:checked ~ nav {
+    max-height: 500px; 
+  }
+
+  /* Hamburger morphing */
+  .navbar-modern .nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  .navbar-modern .nav-toggle:checked + .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+  .navbar-modern .nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+}
+
+/* ===== SCROLL FIX OTOMATIS ===== */
+html {
+  scroll-padding-top: 90px; /* desktop */
+}
+
+@media (max-width:768px){
+  html {
+    scroll-padding-top: 140px; /* mobile */
+  }
 }
 
 /* ============ HERO SECTION ============ */
 .hero {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; /* default mobile: stack vertikal */
+  justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
-  padding: 8rem 10% 5rem;
+  padding: 4rem 6% 3rem;
   background: radial-gradient(circle at top left, #050510, #050510);
   position: relative;
   overflow: hidden;
@@ -112,21 +198,17 @@ nav a:hover::after {
   z-index: 0;
 }
 
-@keyframes pulseGlow {
-  0%, 100% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.2); opacity: 1; }
-}
-
 .hero-content {
-  flex: 1;
   z-index: 2;
+  text-align: center;
   animation: fadeInLeft 1.2s ease forwards;
 }
 
 .hero-content h2 {
-  font-size: 3rem;
+  font-size: 2.4rem;
   color: #fff;
   line-height: 1.3;
+  margin-bottom: 1rem;
 }
 
 .hero-content span {
@@ -134,8 +216,8 @@ nav a:hover::after {
 }
 
 .hero-content p {
-  margin: 1rem 0 2rem;
-  font-size: 1.1rem;
+  margin: 0.8rem 0 1.5rem;
+  font-size: 1rem;
   color: #cfcfcf;
   max-width: 480px;
 }
@@ -144,14 +226,13 @@ nav a:hover::after {
 .btn {
   background: var(--accent);
   color: #000;
-  padding: 0.9rem 2rem;
+  padding: 0.8rem 1.8rem;
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;
-  position: relative;
-  overflow: hidden;
   transition: 0.3s;
   cursor: pointer;
+  margin-top: 1rem;
 }
 .btn:hover {
   transform: translateY(-3px) scale(1.05);
@@ -160,23 +241,69 @@ nav a:hover::after {
 
 /* Hero Image Grid */
 .hero-gallery {
-  flex: 1;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  transition: transform 1.2s ease, opacity 1s ease;
+  grid-template-columns: repeat(2, 1fr); /* mobile: 2 kolom kecil */
+  gap: 0.6rem;
+  padding: 1rem 0;
+  width: 100%;
+  max-width: 600px; /* supaya muat layar kecil */
 }
+
 .hero-gallery img {
   width: 100%;
-  height: 230px;
+  height: 140px; /* kecil tapi proporsional */
   object-fit: cover;
-  border-radius: 15px;
-  filter: brightness(0.9);
-  transition: transform 0.5s ease, filter 0.5s ease;
+  border-radius: 12px;
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
+
 .hero-gallery img:hover {
-  transform: scale(1.05) rotate3d(1, 1, 0, 5deg);
+  transform: scale(1.05) rotate3d(1,1,0,3deg);
   filter: brightness(1.1);
+}
+
+/* ===== Desktop Layout ===== */
+@media (min-width: 769px) {
+  .hero {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8rem 10% 5rem;
+  }
+
+  .hero-content {
+    flex: 1;
+    text-align: left;
+  }
+
+  .hero-content h2 {
+    font-size: 3rem;
+  }
+
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+
+  .hero-gallery {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    max-width: unset;
+    padding: 0;
+  }
+
+  .hero-gallery img {
+    height: 220px;
+  }
+}
+
+/* ===== Mobile Hero Tweak ===== */
+@media (min-width: 769px) {
+  .hero {
+    min-height: 90vh; /* sebelumnya 100vh */
+    padding: 6rem 10% 3rem; /* kurangi bawah */
+  }
 }
 
 /* ============ SECTION TITLES ============ */
@@ -186,7 +313,6 @@ nav a:hover::after {
   margin-bottom: 2.5rem;
   color: var(--accent);
 }
-
 
 /* ============ CARD STYLE ============ */
 .card {
@@ -388,30 +514,16 @@ nav a:hover::after {
   transform: translateY(0);
 }
 
-/* Responsif */
-@media (max-width: 768px) {
-  .subscribe-container {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .subscribe-form {
-    align-items: center;
-    width: 100%;
-  }
-
-  .input-wrapper {
-    max-width: 100%;
-  }
-}
-
 /* ========== FOOTER SECTION (dark glass style) ========== */
 .footer {
   background: rgba(5, 10, 20, 0.6);
   backdrop-filter: blur(12px);
   color: #ddd;
   padding: 3.5rem 1rem 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  z-index: 9999;
+  pointer-events: auto;
 }
 
 .footer-container {
@@ -516,35 +628,12 @@ nav a:hover::after {
   color: var(--accent);
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
-@media (max-width: 768px) {
-  .newsletter h2 {
-    font-size: 1.4rem;
-  }
-
-  .newsletter input {
-    width: 100%;
-  }
-
-  .footer-container {
-    text-align: center;
-  }
-
-  .social-icons {
-    justify-content: center;
-  }
-
-  .footer-links {
-    flex-wrap: wrap;
-  }
-}
-
-/* ======== TOMBOL CLICK CARD GRID ======== */
+/* ========== TOMBOL CLICK CARD GRID ======== */
 .card-link {
   text-decoration: none;
   color: inherit;
-  display: block; /* ubah dari inline-block jadi block agar bisa meliputi seluruh card */
-  width: fit-content; /* jaga ukuran card tetap sesuai isi */
+  display: block;
+  width: fit-content;
 }
 
 .card-link .card {
@@ -558,13 +647,11 @@ nav a:hover::after {
 }
 
 .card {
-  height: 360px; /* atur sesuai kebutuhan */
+  height: 360px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
-
 
 /* ======== SCROLL HORIZONTAL UNTUK SEMUA CARD GRID ======== */
 #Keahlian,
@@ -575,12 +662,7 @@ nav a:hover::after {
   position: relative;
 }
 
-/* Buat scroll horizontal */
-#Keahlian .card-grid,
-#Prestasi .card-grid,
-#Hobbi .card-grid,
-#bakat .card-grid,
-#Pendidikan .card-grid {
+.card-grid {
   display: flex;
   gap: 1.5rem;
   overflow-x: auto;
@@ -590,29 +672,15 @@ nav a:hover::after {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Scrollbar Style */
-#Keahlian .card-grid::-webkit-scrollbar,
-#Prestasi .card-grid::-webkit-scrollbar,
-#Hobbi .card-grid::-webkit-scrollbar,
-#bakat .card-grid::-webkit-scrollbar,
-#Pendidikan .card-grid::-webkit-scrollbar {
+.card-grid::-webkit-scrollbar {
   height: 8px;
 }
-#Keahlian .card-grid::-webkit-scrollbar-thumb,
-#Prestasi .card-grid::-webkit-scrollbar-thumb,
-#Hobbi .card-grid::-webkit-scrollbar-thumb,
-#bakat .card-grid::-webkit-scrollbar-thumb,
-#Pendidikan .card-grid::-webkit-scrollbar-thumb {
+.card-grid::-webkit-scrollbar-thumb {
   background: var(--accent);
   border-radius: 10px;
 }
 
-/* Card lebar fix biar rapi */
-#Keahlian .card,
-#Prestasi .card,
-#Hobbi .card,
-#bakat .card,
-#Pendidikan .card {
+.card-grid .card {
   flex: 0 0 300px;
   min-width: 260px;
 }
@@ -645,1246 +713,11 @@ nav a:hover::after {
 .scroll-btn.left { left: 12px; }
 .scroll-btn.right { right: 12px; }
 
-@media (max-width: 520px) {
-  .scroll-btn { display: none; }
-}
-
 /* ========== MAP SECTION MODERN ========== */
 .map-section {
   padding: 4rem 10%;
-  background: rgba(10, 20, 30, 0.7); /* selaras dengan card-bg */
+  background: rgba(10, 20, 30, 0.7);
   border-radius: 12px;
-  margin: 3rem auto;
+  margin: 3rem;
 }
 
-#map-container {
-  width: 100%;
-  height: 400px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: transform 0.3s ease;
-}
-
-#map-container:hover {
-  transform: scale(1.01);
-}
-
-#alamat-container {
-  text-align: center;
-  margin-top: 1rem;
-  background: rgba(10, 20, 30, 0.6);
-  border-radius: 10px;
-  padding: 1rem;
-  color: #00baff;
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
-}
-
-/* Nonaktifkan klik pada elemen yang mungkin menutupi */
-.subscribe::after,
-.map-section::after,
-#map-container::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: transparent;
-  pointer-events: none;
-}
-
-/* Pastikan footer berada paling atas layer */
-.footer {
-  position: relative;
-  z-index: 9999 !important;
-  pointer-events: auto !important;
-}
-
-/* Semua link footer aktif */
-.footer a {
-  position: relative;
-  z-index: 10000;
-  pointer-events: auto !important;
-}
-
-/* Cek kemungkinan overlay */
-.subscribe,
-.map-section,
-#map-container {
-  z-index: 1 !important;
-  pointer-events: none; /* ini matikan klik dari area yang nutupin */
-}
-
-/* ========== TOGGLE MODE BUTTON ========== */
-.mode-toggle {
-  position: fixed;
-  bottom: 25px;
-  left: 25px;
-  background: var(--accent);
-  color: #000;
-  border: none;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-  z-index: 2000;
-}
-
-.mode-toggle:hover {
-  transform: scale(1.1);
-  background: #00a3e0;
-}
-
-/* ========== LIGHT MODE THEME ========== */
-body.light-mode {
-  background-color: #f5f5f5;
-  color: #222;
-  transition: all 0.5s ease;
-}
-
-body.light-mode .navbar {
-  background: rgba(255,255,255,0.8);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-body.light-mode .logo {
-  color: #0077cc;
-}
-
-body.light-mode nav a {
-  color: #333;
-}
-
-body.light-mode nav a:hover {
-  color: #0077cc;
-}
-
-body.light-mode .card {
-  background: rgba(255, 255, 255, 0.8);
-  color: #222;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-body.light-mode .card h4,
-body.light-mode .card p {
-  color: #222;
-}
-
-body.light-mode .map-section,
-body.light-mode .footer {
-  background: rgba(255,255,255,0.8);
-  color: #222;
-}
-
-body.light-mode .footer a {
-  color: #0077cc;
-}
-
-body.light-mode .footer a:hover {
-  color: #005fa3;
-}
-
-body.light-mode .section-title {
-  color: #0077cc;
-}
-
-body.light-mode .btn {
-  background: #0077cc;
-  color: #fff;
-}
-
-body.light-mode .btn:hover {
-  background: #005fa3;
-}
-
-/* ========== LIGHT MODE - HERO SECTION ========== */
-body.light-mode .hero {
-  background: linear-gradient(to bottom right, #ffffff, #eaf3ff);
-  color: #222;
-}
-
-body.light-mode .hero-content h2 {
-  color: #0077cc;
-}
-
-body.light-mode .hero-content span {
-  color: #00a3e0;
-}
-
-body.light-mode .hero-content p {
-  color: #333;
-}
-
-body.light-mode .hero-content .btn {
-  background: #0077cc;
-  color: #fff;
-  border: none;
-}
-
-body.light-mode .hero-content .btn:hover {
-  background: #005fa3;
-}
-
-body.light-mode .hero-gallery img {
-  border: 2px solid rgba(0,0,0,0.1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  filter: brightness(1.05);
-}
-
-/* ========== LIGHT MODE - SUBSCRIBE SECTION ========== */
-body.light-mode .subscribe {
-  background: linear-gradient(to bottom right, #ffffff, #eaf3ff);
-  color: #222;
-}
-
-body.light-mode .subscribe-text h3 {
-  color: #0077cc;
-}
-
-body.light-mode .subscribe-text p,
-body.light-mode .note {
-  color: #333;
-}
-
-body.light-mode .subscribe-form input {
-  background: #fff;
-  border: 1px solid #ccc;
-  color: #222;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-body.light-mode .subscribe-form input::placeholder {
-  color: #777;
-}
-
-body.light-mode .subscribe-form .btn {
-  background: #0077cc;
-  color: #fff;
-  border: none;
-}
-
-body.light-mode .subscribe-form .btn:hover {
-  background: #005fa3;
-}
-
-body.light-mode .success-popup {
-  background: #fff;
-  color: #0077cc;
-  border: 1px solid #bcdcff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-body.light-mode .success-popup i {
-  color: #00baff;
-}
-
-body.light-mode .toast {
-  background: #0077cc;
-  color: #fff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-/* ========== LIGHT MODE - FIX ICON & LOGO VISIBILITY ========== */
-body.light-mode .card img,
-body.light-mode .hero-gallery img,
-body.light-mode .destinations img,
-body.light-mode .highlights img {
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-/* ========== LIGHT MODE - MAP ADDRESS TEXT (PUTIH) ========== */
-body.light-mode #alamat-text {
-  color: #ffffff !important;
-  background: transparent;
-  text-shadow: 0 0 6px rgba(0, 122, 255, 0.6);
-}
-
-body.light-mode #map h3,
-body.light-mode .section-title {
-  color: #00baff;
-}
-
-/* === PERBAIKAN: AGAR TOMBOL TOGGLE TETAP BISA DIKLIK === */
-.mode-toggle {
-  position: fixed;
-  bottom: 25px;
-  left: 25px;
-  background: var(--accent);
-  color: #000;
-  border: none;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-  z-index: 99999 !important;
-  pointer-events: auto !important;
-}
-
-body.light-mode .mode-toggle {
-  background: #0077cc;
-  color: #fff;
-}
-
-/* === PERBAIKAN WARNA FOOTER UNTUK LIGHT MODE === */
-body.light-mode footer,
-body.light-mode footer a,
-body.light-mode .footer-col h4,
-body.light-mode .footer-col ul li a,
-body.light-mode .footer-col p {
-  color: #111 !important; /* teks jadi gelap agar terbaca di background putih */
-}
-
-body.light-mode footer {
-  background-color: #f0f0f0 !important; /* ubah background footer agar lembut */
-  border-top: 1px solid #ccc;
-}
-
-/* Biar hover-nya tetap elegan di light mode */
-body.light-mode .footer-col ul li a:hover {
-  color: #0077cc !important;
-}
-
-/* === RESPONSIVE UNTUK MOBILE & TABLET === */
-@media (max-width: 768px) {
-  .blog-grid {
-    grid-template-columns: repeat(2, 1fr); /* dari 3 kolom jadi 2 */
-    gap: 15px;
-  }
-
-  .blog-card img {
-    height: auto;
-  }
-
-  .back-btn {
-    font-size: 14px;
-    padding: 8px 12px;
-  }
-
-  .mode-toggle {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-    bottom: 15px;
-    left: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .blog-grid {
-    grid-template-columns: 1fr; /* jadi 1 kolom untuk HP kecil */
-  }
-
-  h2, h3, p {
-    text-align: center;
-  }
-}
-
-.reveal {
-  transform: translate3d(0, 60px, 0);
-}
-
-/* ===========================
-   RESPONSIVE MOBILE VERSION
-   =========================== */
-@media (max-width: 768px) {
-
-  /* Umum */
-  body {
-    padding: 0 10px;
-  }
-
-  .section-title {
-    font-size: 1.4rem;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  /* Grid card di semua section */
-  .card-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  /* Card */
-  .card {
-    width: 100%;
-    max-width: 340px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 15px;
-    background: var(--card-bg, #fff);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    object-fit: cover;
-  }
-
-  .card h4 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-    text-align: center;
-    color: var(--text-color, #333);
-  }
-
-  .card p {
-    font-size: 0.9rem;
-    text-align: center;
-    color: var(--text-muted, #666);
-  }
-
-  /* Link di card */
-  .card-link {
-    width: 100%;
-    max-width: 340px;
-    text-decoration: none;
-  }
-
-  /* Navbar */
-  .navbar {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .navbar nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.8rem;
-  }
-
-  .navbar a {
-    font-size: 0.9rem;
-  }
-
-  /* Hero section */
-  .hero {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-content {
-    padding: 1rem;
-  }
-
-  .hero-gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  .hero-gallery img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-
-  /* Footer */
-  .footer-container {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 1.5rem;
-  }
-
-  .footer-col {
-    margin: 0 auto;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    gap: 0.8rem;
-    text-align: center;
-  }
-
-  /* Subscribe section */
-  .subscribe-container {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-
-  .input-wrapper {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .input-wrapper input {
-    width: 100%;
-  }
-
-  .btn {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-/* ===========================
-   MOBILE ONLY STYLING ≤768px
-   =========================== */
-@media (max-width: 768px) {
-
-  /* Body padding */
-  body {
-    padding: 0 10px;
-  }
-
-  /* Navbar */
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 5%;
-  }
-
-  .navbar nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.8rem;
-  }
-
-  .navbar a {
-    font-size: 0.9rem;
-  }
-
-  /* Hero section */
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 6rem 5rem 3rem;
-  }
-
-  .hero-content {
-    width: 100%;
-    padding: 0 0 2rem 0;
-  }
-
-  .hero-content h2 {
-    font-size: 2rem;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-    margin: 1rem 0 1.5rem;
-  }
-
-  .hero-gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    width: 100%;
-  }
-
-  .hero-gallery img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-
-  /* Section titles */
-  .section-title {
-    font-size: 1.4rem;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  /* Card Grid (stack vertical) */
-  .card-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 0;
-    overflow: visible;
-  }
-
-  .card-link, .card {
-    width: 100%;
-    max-width: 340px;
-  }
-
-  .card img {
-    width: 100%;
-    height: auto;
-  }
-
-  .card h4 {
-    font-size: 1.1rem;
-    text-align: center;
-  }
-
-  .card p {
-    font-size: 0.9rem;
-    text-align: center;
-  }
-
-  /* Subscribe section */
-  .subscribe-container {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-
-  .subscribe-form {
-    width: 100%;
-    align-items: center;
-  }
-
-  .input-wrapper {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .input-wrapper input {
-    width: 100%;
-  }
-
-  .subscribe .btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Map */
-  #map-container {
-    width: 100%;
-    height: 300px;
-  }
-
-  /* Footer */
-  .footer-container {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 1.5rem;
-  }
-
-  .footer-col {
-    margin: 0 auto;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    gap: 0.8rem;
-    text-align: center;
-  }
-
-  /* Toggle mode button */
-  .mode-toggle {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-    bottom: 15px;
-    left: 15px;
-  }
-}
-
-/* ===========================
-   EXTRA MOBILE FIX ≤480px
-   =========================== */
-@media (max-width: 480px) {
-  .hero-gallery {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-content h2 {
-    font-size: 1.6rem;
-  }
-
-  .hero-content p {
-    font-size: 0.95rem;
-  }
-
-  .section-title {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 768px) {
-
-  /* Navbar compact */
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-    padding: 0.5rem 5%; /* lebih kecil dari default 1rem */
-    gap: 0.3rem;
-  }
-
-  .logo {
-    font-size: 1.2rem; /* lebih kecil */
-  }
-
-  .navbar nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem; /* lebih rapat */
-  }
-
-  .navbar a {
-    font-size: 0.85rem; /* lebih kecil */
-    margin: 0; /* hilangkan margin kiri default */
-  }
-}
-
-/* ========== SUBSCRIBE SECTION MOBILE FIX ========== */
-@media (max-width: 768px) {
-  .subscribe-container {
-    grid-template-columns: 1fr; /* 1 kolom */
-    gap: 1.5rem;
-    text-align: center;
-    padding: 2rem 1rem; /* padding agar tidak menempel pinggir */
-  }
-
-  .subscribe-text h3 {
-    font-size: 1.4rem; /* lebih kecil agar muat layar kecil */
-    line-height: 1.4;
-  }
-
-  .subscribe-text .note {
-    font-size: 0.95rem;
-    max-width: 100%;
-    margin: 0 auto 1rem auto;
-  }
-
-  .subscribe-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .input-wrapper {
-    flex-direction: column; /* input & tombol stack */
-    gap: 0.8rem;
-    width: 100%;
-  }
-
-  .subscribe input {
-    width: 100%; /* input full width */
-    padding: 0.8rem 1rem;
-    font-size: 0.95rem;
-  }
-
-  .subscribe .btn {
-    width: 100%; /* tombol full width */
-    padding: 0.9rem 0;
-    font-size: 1rem;
-  }
-
-  /* Success popup & toast tetap responsif */
-  .success-popup {
-    width: 90%;
-    max-width: 320px;
-    padding: 1.5rem 1.8rem;
-  }
-
-  .toast {
-    width: 90%;
-    max-width: 320px;
-    right: 5%;
-    bottom: 15px;
-    font-size: 0.9rem;
-  }
-}
-
-/* ================================
-   MOBILE-FRIENDLY GLOBAL FIX
-   ================================ */
-@media (max-width: 768px) {
-
-  /* ===== Navbar ===== */
-  .navbar {
-    flex-direction: column;
-    gap: 0.3rem;
-    padding: 0.6rem 4%;
-  }
-
-  .navbar nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.6rem;
-  }
-
-  .navbar a {
-    font-size: 0.85rem;
-    padding: 0.2rem 0.5rem;
-  }
-
-  .logo {
-    font-size: 1.2rem;
-  }
-
-  /* ===== Hero Section ===== */
-  .hero {
-    flex-direction: column;
-    padding: 5rem 4% 3rem;
-    text-align: center;
-  }
-
-  .hero-content h2 {
-    font-size: 1.8rem;
-    line-height: 1.3;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-    max-width: 100%;
-    margin: 0.8rem auto 1.5rem;
-  }
-
-  .hero-gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 1rem;
-  }
-
-  .hero-gallery img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-
-  /* ===== Card Grids (all sections) ===== */
-  .card-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 0 4%;
-  }
-
-  .card {
-    width: 100%;
-    max-width: 340px;
-    margin: 0 auto;
-    height: auto;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 12px;
-    border-radius: 15px;
-  }
-
-  .card img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
-
-  .card h4 {
-    font-size: 1.1rem;
-    text-align: center;
-  }
-
-  .card p {
-    font-size: 0.9rem;
-    text-align: center;
-  }
-
-  /* Remove horizontal scroll buttons on mobile */
-  .scroll-btn {
-    display: none;
-  }
-
-  /* ===== Kritik & Saran Section ===== */
-:root {
-  --bg-dark: #0d0d10;
-  --text-light: #f5f5f5;
-  --accent: #00d9ff;
-  --accent-dim: rgba(0, 217, 255, 0.3);
-  --input-bg: #15151a;
-  --border: rgba(255, 255, 255, 0.1);
-  --radius: 12px;
-  --transition: 0.3s ease;
-}
-
-/* ===== Container Utama ===== */
-.kritik-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  background: var(--bg-dark);
-  color: var(--text-light);
-  font-family: 'Poppins', sans-serif;
-}
-
-/* ===== Teks Judul ===== */
-.kritik-text {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.kritik-text h3 {
-  font-size: 2rem;
-  color: var(--accent);
-  margin-bottom: 0.5rem;
-}
-
-.kritik-text .note {
-  font-size: 1rem;
-  opacity: 0.8;
-}
-
-/* ===== Form ===== */
-.kritik-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  max-width: 450px;
-  background: var(--input-bg);
-  padding: 2rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-sizing: border-box;
-}
-
-/* ===== Input & Textarea ===== */
-.kritik-form input,
-.kritik-form textarea {
-  background: transparent;
-  border: 1px solid var(--border);
-  padding: 0.9rem 1rem;
-  color: var(--text-light);
-  font-size: 1rem;
-  border-radius: var(--radius);
-  outline: none;
-  transition: border var(--transition), background var(--transition);
-}
-
-.kritik-form input:focus,
-.kritik-form textarea:focus {
-  border-color: var(--accent);
-  background: rgba(0, 217, 255, 0.05);
-}
-
-/* ===== Tombol ===== */
-.kritik-form .btn {
-  background: var(--accent);
-  border: none;
-  color: #000;
-  font-weight: 600;
-  padding: 0.9rem;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: background var(--transition), transform var(--transition);
-}
-
-.kritik-form .btn:hover {
-  background: #00ffff;
-  transform: translateY(-2px);
-}
-
-/* ===== Popup & Toast ===== */
-.success-popup {
-  display: none;
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--accent-dim);
-  color: var(--text-light);
-  padding: 1rem 1.5rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--accent);
-  font-size: 1rem;
-  z-index: 999;
-}
-
-.success-popup.show {
-  display: block;
-}
-
-#toast {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--accent);
-  color: #000;
-  padding: 10px 20px;
-  border-radius: var(--radius);
-  font-weight: 600;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-#toast.show {
-  opacity: 1;
-}
-
-/* ===== Responsif ===== */
-@media (max-width: 768px) {
-  .kritik-form {
-    padding: 1.5rem;
-  }
-
-  .kritik-text h3 {
-    font-size: 1.6rem;
-  }
-}
-
-
-  /* ===== Footer ===== */
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    text-align: center;
-  }
-
-  .footer-col {
-    margin: 0 auto;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-}
-
-/* ===== Hero Section - Mobile Fix Image ===== */
-@media (max-width: 768px) {
-  .hero-gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 1rem;
-  }
-
-  .hero-gallery img {
-    width: 100%;
-    height: auto;       /* otomatis, tidak terpotong */
-    max-height: 200px;  /* atur tinggi maksimal agar proporsional */
-    object-fit: contain; /* menampilkan seluruh gambar tanpa crop */
-    border-radius: 10px;
-  }
-}
-
-@media (max-width: 768px) {
-
-  /* Grid card di semua section */
-  .card-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 0 10px; /* beri sedikit padding kiri kanan */
-  }
-
-  /* Card */
-  .card {
-    width: 100%;
-    max-width: 340px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    padding: 15px;
-    background: var(--card-bg);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: auto; /* biarkan tinggi mengikuti isi */
-  }
-
-  .card img {
-    width: 100%;
-    height: auto; /* tinggi otomatis supaya tidak terpotong */
-    border-radius: 12px;
-    margin-bottom: 10px;
-    object-fit: cover;
-  }
-
-  .card h4 {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-    text-align: center;
-    color: var(--text-color, #fff);
-  }
-
-  .card p {
-    font-size: 0.95rem;
-    text-align: center;
-    color: var(--text-muted, #ccc);
-    margin-bottom: 0;
-    line-height: 1.4; /* biar teks tidak mepet */
-    word-wrap: break-word; /* supaya teks panjang tetap turun */
-  }
-}
-
-/* ===========================
-   FIX TEKS CARD TERPOTONG
-   =========================== */
-
-/* Card Grid - Desktop & Tablet */
-.card-grid {
-  display: flex;
-  flex-wrap: nowrap; /* horizontal scroll tetap aktif */
-  gap: 1.5rem;
-  padding: 2rem 10%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-}
-
-.card-grid .card {
-  flex: 0 0 300px; /* lebar card */
-  min-width: 260px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.card-grid .card h4,
-.card-grid .card p {
-  word-wrap: break-word; /* teks panjang wrap */
-  white-space: normal;
-  overflow-wrap: break-word;
-}
-
-/* Mobile Fix <=768px */
-@media (max-width: 768px) {
-  .card-grid {
-    flex-direction: column;
-    align-items: center;
-    padding: 0 10px;
-    overflow-x: visible; /* nonaktif horizontal scroll */
-  }
-
-  .card-grid .card {
-    width: 100%;
-    max-width: 340px;
-    min-height: auto; /* tinggi mengikuti konten */
-    padding: 12px;
-    border-radius: 15px;
-  }
-
-  .card-grid .card img {
-    width: 100%; /* otomatis supaya tidak terpotong */
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 10px;
-  }
-
-
-  .card-grid .card h4,
-  .card-grid .card p {
-    font-size: 1.1rem;
-    text-align: center;
-    line-height: 1.4;
-    color: var(--text-color, #fff);
-    word-wrap: break-word;
-  }
-}
-
-/* Atur ulang tinggi card di mobile agar teks tidak terpotong */
-@media (max-width: 768px) {
-
-
-  /* Jika layar sangat kecil */
-  @media (max-width: 480px) {
-    .card-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-}
-
-.hero-gallery img:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
-}
-
-/* 🔧 Untuk layar kecil (HP) */
-@media (max-width: 768px) {
-  .hero-gallery {
-    grid-template-columns: 1fr 1fr; /* dua kolom */
-    gap: 0.8rem;
-  }
-
-  .hero-gallery img {
-    max-height: 180px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-gallery {
-    grid-template-columns: 1fr; /* satu kolom di HP kecil */
-  }
-
-  .hero-gallery img {
-    max-height: 160px;
-  }
-}
-
-
-/* ===== CARD GRID ===== */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem 10%;
-  justify-items: center;
-}
-
-.card {
-  background: var(--card-bg, rgba(255,255,255,0.05));
-  border-radius: 16px;
-  overflow: hidden;
-  padding-bottom: 1rem;
-  text-align: center;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px 12px 0 0;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 4rem 1.5rem;
-  }
-
-  .hero-gallery {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .card-grid {
-    grid-template-columns: 1fr;
-    padding: 0 1.5rem;
-  }
-
-  .card img {
-    height: 180px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-gallery {
-    grid-template-columns: 1fr;
-  }
-}
