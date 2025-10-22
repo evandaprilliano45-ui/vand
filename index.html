@@ -27,7 +27,7 @@
       <a href="#Hobbi">Hobbi</a>
       <a href="#bakat">Minat Bakat</a>
       <a href="#Pendidikan">Pendidikan</a>
-      <a href="#subscribe">Kontak</a>
+      <a href="#kritik-form">Kontak</a>
     </nav>
   </header>
 
@@ -322,94 +322,27 @@ fetch(url)
   });
 </script>
 
-  
-<!-- ========== SUBSCRIBE SECTION ========== -->
-<section class="subscribe reveal" id="subscribe">
-  <div class="subscribe-container">
-    <div class="subscribe-text">
-      <h3 class="section-title">
-        <i class="fa-solid fa-envelope"></i>  
-        Masukan email anda dan berteman dengan saya
-      </h3>
-      <p class="note">Dapatkan update terbaru dari proyek dan karya saya langsung di inbox kamu.</p>
-    </div>
 
-    <form id="subscribe-form" class="subscribe-form" autocomplete="on">
-      <div class="input-wrapper">
-
-        <input
-          type="email"
-          id="email"
-          placeholder="Masukkan email kamu..."
-          autocomplete="email"
-          required
-        />
-
-        <button type="submit" class="btn">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span>Kenalan</span>
-        </button>
-      </div>
-      <small class="error-message" id="error-message"></small>
-    </form>
+<!-- ===== Kritik & Saran Section ===== -->
+<div class="kritik-container">
+  <div class="kritik-text">
+    <h3>Kirim Kritik & Saran</h3>
+    <p class="note">Beri masukanmu agar kami bisa lebih baik!</p>
   </div>
 
-  <!-- Popup sukses -->
-  <div class="success-popup" id="success-popup">
-    <i class="fa-solid fa-circle-check"></i>
-    <h4>Berhasil Terhubung</h4>
-    <p>Terima kasih sudah mampir ke website saya!</p>
-  </div>
+  <form id="kritik-form">
+    <input type="text" id="nama" name="name" placeholder="Nama" required>
+    <input type="email" id="email" name="email" placeholder="Email" required>
+    <textarea id="pesan" name="message" rows="4" placeholder="Tulis kritik/saranmu..." required></textarea>
+    <button type="submit" class="btn">Kirim</button>
+  </form>
+</div>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toast"></div>
+<div id="toast"></div>
+<div class="success-popup" id="success-popup">Terima kasih! Kritik Anda terkirim.</div>
 
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("subscribe-form");
-  const emailInput = document.getElementById("email");
-  const errorMessage = document.getElementById("error-message");
-  const successPopup = document.getElementById("success-popup");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = emailInput.value.trim();
-
-    // Validasi email menggunakan regex
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errorMessage.textContent = "Masukkan alamat email yang valid.";
-      return;
-    }
-
-    errorMessage.textContent = "";
-
-    try {
-      const response = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Tampilkan popup sukses
-        successPopup.style.display = "flex";
-        setTimeout(() => (successPopup.style.display = "none"), 3000);
-        form.reset();
-      } else {
-        errorMessage.textContent = data.message || "Terjadi kesalahan";
-      }
-    } catch (err) {
-      errorMessage.textContent = "Tidak dapat terhubung ke server";
-    }
-  });
-});
-</script>
-
-
-</section>
-
+<!-- Tambahkan Script EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 
 <!-- ========== FOOTER SECTION ========== -->
