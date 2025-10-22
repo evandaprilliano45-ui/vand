@@ -186,14 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const map = L.map('map-container', { zoomControl: false })
     .setView([-6.465839, 110.725829], 15);
 
-
-  // Tile gelap elegan dari CartoDB Dark
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
-    subdomains: 'abcd',
-    maxZoom: 19
-  }).addTo(map);
-
   // Marker custom dengan ikon gelap & aksen biru
   const icon = L.divIcon({
     className: 'custom-marker',
@@ -216,8 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1️⃣ Radius interaktif di sekitar marker utama
   const radius = L.circle([-6.465839, 110.725829], {
     radius: 300,
-    color: '#00baff33',
-    fillColor: '#00baff22',
+    color: '#9cc7dced',
+    fillColor: '#f2f7f8f0',
     fillOpacity: 0.2,
     weight: 1
   }).addTo(map);
