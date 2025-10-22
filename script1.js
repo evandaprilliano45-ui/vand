@@ -129,21 +129,16 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("subscribe-form");
   const emailInput = document.getElementById("email");
+  const errorMessage = document.getElementById("error-message");
   const popup = document.getElementById("success-popup");
   const toast = document.getElementById("toast");
-  const errorMessage = document.getElementById("error-message");
-
-  if (!form) {
-    console.warn("Form subscribe tidak ditemukan di halaman.");
-    return;
-  }
 
   function showToast(message, type = "success") {
     if (!toast) return;
     toast.textContent = message;
     toast.style.borderColor = type === "error" ? "#ef4444" : "rgba(255,255,255,0.1)";
     toast.style.background =
-      type === "error" ? "rgba(60, 20, 20, 0.9)" : "rgba(40, 44, 52, 0.9)";
+      type === "error" ? "rgba(60,20,20,0.9)" : "rgba(40,44,52,0.9)";
     toast.classList.add("show");
     setTimeout(() => toast.classList.remove("show"), 3000);
   }
@@ -163,17 +158,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     errorMessage.textContent = "";
-    showToast("Menghubungkan...");
+    showToast("Berhasil terhubung! 🎉");
 
-    // Simulasi kirim data ke server
-    setTimeout(() => {
-      form.reset();
-      if (popup) popup.classList.add("show");
-      showToast("Berhasil terhubung! 🎉");
-      setTimeout(() => popup?.classList.remove("show"), 2000);
-    }, 1200);
+    // Tampilkan popup sukses
+    if (popup) popup.classList.add("show");
+    setTimeout(() => popup?.classList.remove("show"), 3000);
+
+    form.reset();
   });
 });
+
 
 
 /* ========== MAP ========== */
@@ -242,14 +236,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 50);
 });
 
-let ticking = false;
-window.addEventListener("scroll", function () {
-  if (!ticking) {
-    window.requestAnimationFrame(function () {
-      revealElements();
-      ticking = false;
-    });
-    ticking = true;
-  }
-});
 
