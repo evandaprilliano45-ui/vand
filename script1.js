@@ -213,7 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ===== Efek Interaktif Peta =====
-  // 1️⃣ Radius interaktif di sekitar marker utama
+
+  //  Radius interaktif di sekitar marker utama
   const radius = L.circle([-6.465839, 110.725829], {
     radius: 300,
     color: '#9cc7dced',
@@ -222,12 +223,12 @@ document.addEventListener('DOMContentLoaded', () => {
     weight: 1
   }).addTo(map);
 
-  // 2️⃣ Tooltip follow cursor
+  //  Tooltip follow cursor
   map.on('mousemove', e => {
     radius.setLatLng(e.latlng);
   });
 
-  // 3️⃣ Zoom smooth saat scroll
+  //  Zoom smooth saat scroll
   window.addEventListener('scroll', () => {
     const mapRect = mapContainer.getBoundingClientRect();
     if (mapRect.top < window.innerHeight && mapRect.bottom > 0) {
@@ -236,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 4️⃣ Efek partikel cahaya halus di marker utama
+  //  Efek partikel cahaya halus di marker utama
   const mapParticles = L.circleMarker([-6.465839, 110.725829], {
     radius: 5,
     color: 'var(--accent)',
@@ -250,4 +251,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 50);
 });
 
+// Highlight navbar active link saat scroll
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  let scrollY = window.pageYOffset;
+
+  sections.forEach(sec => {
+    const sectionHeight = sec.offsetHeight;
+    const sectionTop = sec.offsetTop - 70;
+    const sectionId = sec.getAttribute('id');
+
+    if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if(link.getAttribute('href') === `#${sectionId}`){
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+});
+
+// Highlight navbar-modern active link saat scroll
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.navbar-modern nav a');
+
+  let scrollY = window.pageYOffset;
+
+  sections.forEach(sec => {
+    const sectionHeight = sec.offsetHeight;
+    const sectionTop = sec.offsetTop - 70;
+    const sectionId = sec.getAttribute('id');
+
+    if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = document.querySelector(`.navbar-modern nav a[href="#${sectionId}"]`);
+      if(activeLink) activeLink.classList.add('active');
+    }
+  });
+});
 
