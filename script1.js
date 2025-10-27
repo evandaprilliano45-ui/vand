@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })();
 
-// ========== Kritik & Saran (Gabung EmailJS + Validasi + Popup) ==========
+// ========== Kritik & Saran (Gabung EmailJS + Validasi + Popup) ==========  
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("kritik-form");
   const namaInput = document.getElementById("nama");
@@ -167,8 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Kirim ke EmailJS
-    emailjs.sendForm("service_ubqq3un", "template_tzfz41c", form)
+    // Kirim ke EmailJS dengan template baru
+    emailjs.sendForm("service_ubqq3un", "template_8jgrvlu", form)
       .then(() => {
         popup.classList.add("show");
         showToast("🎉 Pesan berhasil dikirim!");
@@ -181,7 +181,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
-
 
 
 /* ========== MAP ========== */
@@ -294,3 +293,110 @@ window.addEventListener('scroll', () => {
   });
 });
 
+// LAGU SPOTIFY BROKKK //
+
+// Ambil elemen
+const audio = document.getElementById("audio");
+const lyricsContainer = document.getElementById("lyrics");
+const progress = document.getElementById("progress");
+
+// Update progress bar (kalau ada)
+audio.addEventListener("timeupdate", () => {
+  if (audio.duration) {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progress.style.width = percent + "%";
+  }
+});
+
+// Data lirik
+const lyricsData = [
+  { time: 13.6, text: "Tak sadar ku temukan" },
+  { time: 17.5, text: "Temukan wanita rupawan" },
+  { time: 20.9, text: "Yang sadarkan" },
+  { time: 23.4, text: "Dia seorang" },
+  { time: 24.8, text: "Tiada lain tiada bukan" },
+  { time: 28.9, text: "Hanya dia" },
+  { time: 38.1, text: "Dia buatku nyaman" },
+  { time: 44.3, text: "Dalam hangat pelukan" },
+  { time: 48.2, text: "Dia perasa" },
+  { time: 49.4, text: "Yang mengerti yang kurasa" },
+  { time: 53.2, text: "Hanya dia" },
+  { time: 60.2, text: "Kan ku arungi tujuh laut samudra" },
+  { time: 66.7, text: "Kan ku daki pegunungan Himalaya" },
+  { time: 72.9, text: "Apapun kan ku lakukan tuk dirimu sayang" },
+  { time: 78.2, text: "Oh penjaga hatiku" },
+  { time: 81.1, text: "......" },
+  { time: 93.7, text: "Kau dan aku sempurna" },
+  { time: 98.0, text: "Semoga ada cara tuk terus bersama" },
+  { time: 102.6, text: "Selalu ku tunggu" },
+  { time: 105.8, text: "Tak mau berlalu" },
+  { time: 109.0, text: "Kau dan aku" },
+  { time: 115.6, text: "Kan ku arungi tujuh laut samudra" },
+  { time: 122.0, text: "Kan ku daki pegunungan Himalaya" },
+  { time: 127.8, text: "Apapun kan ku lakukan tuk dirimu sayang" },
+  { time: 133.3, text: "Oh penjaga hatiku" },
+  { time: 140.2, text: "oooo" },
+  { time: 144.4, text: "......" },
+  { time: 164.9, text: "Kan ku arungi tujuh laut samudra" },
+  { time: 170.9, text: "Kan ku daki pegunungan Himalaya" },
+  { time: 177.6, text: "Apapun kan ku lakukan tuk dirimu sayang" },
+  { time: 182.7, text: "Oh penjaga hatiku" },
+  { time: 186.8, text: "oooo" },
+  { time: 189.8, text: "Karna bersamamu semua terasa indah" },
+  { time: 195.8, text: "Gundah gulana hatiku pun hancur sirna" },
+  { time: 202.2, text: "Janji ku tak kan ku lepas wahai kau bidadariku dari surga" },
+  { time: 209.8, text: "Tuk selamanya" },
+  { time: 226.8, text: "....." },
+];
+
+// Buat hanya 3 baris lirik
+const prevLine = document.createElement("div");
+const currentLine = document.createElement("div");
+const nextLine = document.createElement("div");
+
+prevLine.className = "line prev";
+currentLine.className = "line current";
+nextLine.className = "line next";
+
+lyricsContainer.innerHTML = "";
+lyricsContainer.appendChild(prevLine);
+lyricsContainer.appendChild(currentLine);
+lyricsContainer.appendChild(nextLine);
+
+let currentIndex = -1;
+
+// Update lirik sesuai waktu audio
+audio.addEventListener("timeupdate", () => {
+  const currentTime = audio.currentTime;
+  const index = lyricsData.findIndex((line, i) => {
+    const next = lyricsData[i + 1];
+    return currentTime >= line.time && (!next || currentTime < next.time);
+  });
+
+  if (index !== -1 && index !== currentIndex) {
+    currentIndex = index;
+    const prev = lyricsData[index - 1]?.text || "";
+    const current = lyricsData[index]?.text || "";
+    const next = lyricsData[index + 1]?.text || "";
+    prevLine.textContent = prev;
+    currentLine.textContent = current;
+    nextLine.textContent = next;
+  }
+}); {
+    currentIndex = index;
+    document.querySelectorAll(".line").forEach(el => el.classList.remove("active"));
+    const activeLine = document.querySelectorAll(".line")[index];
+    activeLine.classList.add("active");
+
+    // Scroll halus tapi tetap bisa manual scroll
+    if (!lyricsContainer.matches(":hover")) {
+      activeLine.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+;
+
+// Hapus event global yang menghalangi klik audio
+// dan biarkan pengguna bebas scroll + klik
+lyricsContainer.addEventListener("wheel", () => {
+  // Dibiarkan kosong supaya tidak mengunci scroll
+});
